@@ -7,10 +7,28 @@ import * as net from 'net';
 export const omnaiscopeBackendManager = (()=> { // singelton for only one possible encapsulated instance of the backend 
     let backendProcess : ChildProcess | null = null;
     let port : number = 0;  
+    let os = "";
+
+
+    const miniOmniPath = (osString: string): string => {
+        if (osString === "linux") {
+            return "MiniOmni";
+        } else if (osString === "win32") {
+            return "MiniOmni.exe";
+        }
+    }
 
     function isAddressInfo(address: string | net.AddressInfo | null): address is net.AddressInfo {
         return typeof address === 'object' && address !== null && typeof address.port === 'number';
-    }    
+    }
+
+    function osFilePath(osString: string): string {
+        if (osString === "linux") {
+            return "MiniOmni";
+        } else if (osString === "win32") {
+            return "MiniOmni.exe";
+        }
+    }
 
     async function getFreePort() : Promise<number>{
         return new Promise((resolve, reject) => {
@@ -31,14 +49,15 @@ export const omnaiscopeBackendManager = (()=> { // singelton for only one possib
 
     function getBackendPath(): string {
         const exePath: string = app.isPackaged 
-        ? join(process.resourcesPath, "MiniOmni") // production mode 
-        : join(__dirname, "..", "res", "omnai_BE", "MiniOmni") // dev mode 
+        ? join(process.resourcesPath, miniOmniPath(os)) // production mode 
+        : join(__dirname, "..", "res", "omnai_BE", miniOmniPath(os)) // dev mode 
 
         return exePath; 
     }
 
-    async function startBackend(): Promise<void> {
+    async function startBackend(osIn: string): Promise<void> {
         const exePath : string = getBackendPath(); 
+        os = osIn;
 
         port = await getFreePort(); 
 

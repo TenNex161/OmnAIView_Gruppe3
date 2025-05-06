@@ -17,7 +17,7 @@ const config: ForgeConfig = {
     ],
   },
   rebuildConfig: {},
-  makers: [new MakerSquirrel({}, ["win32"]), new MakerZIP({}, ["darwin", "linux"]), new MakerRpm({}), new MakerDeb({}, [])],
+  makers: [new MakerSquirrel({}, ["win32"]), new MakerZIP({}, ["darwin"]), new MakerRpm({}), new MakerDeb({}, ["linux"])],
   plugins: [
     // Fuses are used to enable/disable various Electron functionality
     // at package time, before code signing the application

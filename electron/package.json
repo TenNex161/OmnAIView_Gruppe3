@@ -9,8 +9,7 @@
     "package": "electron-forge package",
     "make": "tsc && electron-forge make",
     "publish": "electron-forge publish",
-    "lint": "eslint --ext .ts,.tsx .",
-    "make-linux": "npx @electron-forge/cli make --platform linux --targets deb"
+    "lint": "eslint --ext .ts,.tsx ."
   },
   "keywords": [],
   "author": {
@@ -20,7 +19,7 @@
   "license": "MIT",
   "devDependencies": {
     "@electron-forge/cli": "^7.7.0",
-    "@electron-forge/maker-deb": "^7.7.0",
+    "@electron-forge/maker-deb": "^7.8.0",
     "@electron-forge/maker-rpm": "^7.7.0",
     "@electron-forge/maker-squirrel": "^7.7.0",
     "@electron-forge/maker-zip": "^7.7.0",
@@ -46,5 +45,21 @@
   "dependencies": {
     "electron-squirrel-startup": "^1.0.1",
     "fs-extra": "^11.3.0"
+  },
+  "config": {
+    "forge": {
+      "makers": [
+        {
+          "name": "@electron-forge/maker-deb",
+          "platforms": ["linux"],
+          "config": {
+            "options": {
+              "maintainer": "AI-Gruppe",
+              "homepage": "https://gruppe.ai"
+            }
+          }
+        }
+      ]
+    }
   }
 }

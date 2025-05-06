@@ -7,6 +7,17 @@ if (require('electron-squirrel-startup')) {
   app.quit();
 }
 
+// Detect OS
+const detectOs = (): string => {
+  const os = require('os');
+  if (os.platform() === "win32" || os.platform() === "linux") {
+    console.log("os.platform()");
+    return os.platform();
+  } else {
+    throw new Error("OS not supported!");
+  }
+}
+
 const createWindow = (): void => {
   // Create the browser window.
   const mainWindow = new BrowserWindow({
@@ -22,7 +33,7 @@ const createWindow = (): void => {
   mainWindow.loadFile(indexPath).catch(err => console.error("Fehler beim Laden der HTML-Datei:", err));
 };
 
-omnaiscopeBackendManager.startBackend();
+omnaiscopeBackendManager.startBackend(detectOs.toString());
 
 ipcMain.handle('get-omnaiscope-backend-port', async () => {
   return omnaiscopeBackendManager.getPort();
