@@ -11,6 +11,7 @@ const config: ForgeConfig = {
     asar: true,
     extraResource: [
       "./res/omnai_BE/MiniOmni", 
+      "./res/omnai_BE/MiniOmni.exe", 
       "./res/omnai_BE/libusb-1.0.dll",
       "./res/omnai_BE/abseil_dll.dll",
       "./res/omnai_BE/libprotobuf.dll"
