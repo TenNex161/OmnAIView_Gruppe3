@@ -10,14 +10,14 @@ const config: ForgeConfig = {
   packagerConfig: {
     asar: true,
     extraResource: [
-      "./res/omnai_BE/MiniOmni.exe", 
+      "./res/omnai_BE/MiniOmni", 
       "./res/omnai_BE/libusb-1.0.dll",
       "./res/omnai_BE/abseil_dll.dll",
       "./res/omnai_BE/libprotobuf.dll"
     ],
   },
   rebuildConfig: {},
-  makers: [new MakerSquirrel({}, ["win32"]), new MakerZIP({}, ['darwin']), new MakerRpm({}), new MakerDeb({})],
+  makers: [new MakerSquirrel({}, ["win32"]), new MakerZIP({}, ["darwin", "linux"]), new MakerRpm({}), new MakerDeb({}, [])],
   plugins: [
     // Fuses are used to enable/disable various Electron functionality
     // at package time, before code signing the application

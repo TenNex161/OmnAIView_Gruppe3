@@ -31,8 +31,8 @@ export const omnaiscopeBackendManager = (()=> { // singelton for only one possib
 
     function getBackendPath(): string {
         const exePath: string = app.isPackaged 
-        ? join(process.resourcesPath, "MiniOmni.exe") // production mode 
-        : join(__dirname, "..", "res", "omnai_BE", "MiniOmni.exe") // dev mode 
+        ? join(process.resourcesPath, "MiniOmni") // production mode 
+        : join(__dirname, "..", "res", "omnai_BE", "MiniOmni") // dev mode 
 
         return exePath; 
     }
